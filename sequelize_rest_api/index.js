@@ -140,23 +140,23 @@ app.delete('/api/menus/:id', async (req, res) => {
         res.status(400).send(e.message);
     }
 });
-// // 3. create an endpoint that will update a restaurant by ID (HTTP Method = put)
-// app.put('/api/restaurants/:id', async (req, res) => {
-//     try {
-//         const restaurant = await Restaurant.update(req.body, {
-//             where: req.params
-//         });
+// Create an endpoint that will update a menu by ID (HTTP Method = put)
+app.put('/api/menus/:id', async (req, res) => {
+    try {
+        const menu = await Menu.update(req.body, {
+            where: req.params
+        });
 
-//         const restaurantUpdated = await Restaurant.findAll({
-//             where: req.params
-//         }); 
+        const menuUpdated = await Menu.findAll({
+            where: req.params
+        }); 
 
-//         // 200 = success
-//         res.status(200).send(restaurantUpdated);
-//     } catch (e) {
-//         res.status(400).send(e.message);
-//     }
-// });
+        // 200 = success
+        res.status(200).send(menuUpdated);
+    } catch (e) {
+        res.status(400).send(e.message);
+    }
+});
 
 
 
