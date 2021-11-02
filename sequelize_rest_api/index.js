@@ -37,10 +37,11 @@ app.get('/api/restaurants', async (req, res) => {
 });
   
 // 1. create an endpoint that will get a restaurant by ID (HTTP Method = get)
-app.get('/api/restaurants', async (req, res) => {
+app.get('/api/restaurants/:id', async (req, res) => {
     try {
-        // create a row in the database using sequelize create method
-        const restaurants = await Restaurant.findAll({});
+        const restaurants = await Restaurant.findAll({
+            where: req.params
+        });
 
         // 200 = success
         res.status(200).send(restaurants);
