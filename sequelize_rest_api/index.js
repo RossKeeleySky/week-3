@@ -49,8 +49,20 @@ app.get('/api/restaurants/:id', async (req, res) => {
         res.status(400).send(e.message);
     }
 });
-// 2. create an endpoint that will delete a restaurant by ID (HTTP Method = delete)
 
+// 2. create an endpoint that will delete a restaurant by ID (HTTP Method = delete)
+app.delete('/api/restaurants/:id', async (req, res) => {
+    try {
+        const restaurants = await Restaurant.destroy({
+            where: req.params
+        });
+
+        // 200 = success
+        res.status(200).send(restaurants);
+    } catch (e) {
+        res.status(400).send(e.message);
+    }
+});
 // 3. create an endpoint that will update a restaurant by ID (HTTP Method = put)
 
 // 4. create a suite of menu and menu item routes that will CRUD each resource
