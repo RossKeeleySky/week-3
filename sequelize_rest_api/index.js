@@ -57,8 +57,10 @@ app.delete('/api/restaurants/:id', async (req, res) => {
             where: req.params
         });
 
+        const restaurantsUpdated = await Restaurant.findAll({}); 
+
         // 200 = success
-        res.status(200).send(restaurants);
+        res.status(200).send(restaurantsUpdated);
     } catch (e) {
         res.status(400).send(e.message);
     }
@@ -124,18 +126,20 @@ app.get('/api/menus/:id', async (req, res) => {
 });
 
 // Create an endpoint that will delete a menu by ID (HTTP Method = delete)
-// app.delete('/api/restaurants/:id', async (req, res) => {
-//     try {
-//         const restaurants = await Restaurant.destroy({
-//             where: req.params
-//         });
+app.delete('/api/menus/:id', async (req, res) => {
+    try {
+        const menus = await Menu.destroy({
+            where: req.params
+        });
 
-//         // 200 = success
-//         res.status(200).send(restaurants);
-//     } catch (e) {
-//         res.status(400).send(e.message);
-//     }
-// });
+        const menusUpdated = await Menu.findAll({});
+
+        // 200 = success
+        res.status(200).send(menusUpdated);
+    } catch (e) {
+        res.status(400).send(e.message);
+    }
+});
 // // 3. create an endpoint that will update a restaurant by ID (HTTP Method = put)
 // app.put('/api/restaurants/:id', async (req, res) => {
 //     try {
