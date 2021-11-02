@@ -1,0 +1,12 @@
+.body {
+    background-color: purple;
+    padding: 100px;
+}
+
+.form-container {
+    background: white;
+}
+
+.input_label {
+    display: inline-block;
+}
