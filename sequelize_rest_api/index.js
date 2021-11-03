@@ -83,12 +83,6 @@ app.put('/api/restaurants/:id', async (req, res) => {
     }
 });
 
-
-
-
-
-
-
 // 4. create a suite of menu and menu item routes that will CRUD each resource
 app.post('/api/menus', async (req, res) => {
     try {
@@ -164,6 +158,30 @@ app.put('/api/menus/:id', async (req, res) => {
 
 
 // 5. find a way to relate the menu items to the menu and the menu to the restaurant
+app.post('/api/menuitems', async (req, res) => {
+    try {
+    const menuItems = await MenuItem.create(req.body);
+    
+    // 201 = created a resource
+    res.status(201).send(menuItems);
+    } catch (e) {
+    res.status(400).send(e.message);
+    }
+})
+
+app.get('/api/menuitems', async (req, res) => {
+    try {
+    const menuItems = await MenuItem.findAll({});
+
+    // 200 = success
+    res.status(200).send(menuItems);
+    } catch (e) {
+    res.status(400).send(e.message);
+    }
+});
+
+
+
 
 // 6. use Sequelize validation to validate the data being sent (you'll do this in the model). Which status code would you send back?
 
