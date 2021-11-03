@@ -180,7 +180,7 @@ app.get('/api/menuitems', async (req, res) => {
     }
 });
 
-// Create an endpoint that will get a menu by ID (HTTP Method = get)
+// Create an endpoint that will get a menu item by ID (HTTP Method = get)
 app.get('/api/menuitems/:id', async (req, res) => {
     try {
         const menuItems = await MenuItem.findAll({
@@ -193,21 +193,21 @@ app.get('/api/menuitems/:id', async (req, res) => {
     }
 });
 
-// Create an endpoint that will delete a menu by ID (HTTP Method = delete)
-// app.delete('/api/menus/:id', async (req, res) => {
-//     try {
-//         const menus = await Menu.destroy({
-//             where: req.params
-//         });
+// Create an endpoint that will delete a menu item by ID (HTTP Method = delete)
+app.delete('/api/menuItems/:id', async (req, res) => {
+    try {
+        const menuItems = await MenuItem.destroy({
+            where: req.params
+        });
 
-//         const menusUpdated = await Menu.findAll({});
+        const menuItemsUpdated = await MenuItem.findAll({});
 
-//         // 200 = success
-//         res.status(200).send(menusUpdated);
-//     } catch (e) {
-//         res.status(400).send(e.message);
-//     }
-// });
+        // 200 = success
+        res.status(200).send(menuItemsUpdated);
+    } catch (e) {
+        res.status(400).send(e.message);
+    }
+});
 // // Create an endpoint that will update a menu by ID (HTTP Method = put)
 // app.put('/api/menus/:id', async (req, res) => {
 //     try {
