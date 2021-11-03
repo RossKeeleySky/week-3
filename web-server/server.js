@@ -1,4 +1,5 @@
 const express = require("express");
+const { check, validationResult } = require("express-validator");
 const { restaurantModel } = require("../sequelize_crud/models/models");
 const { Restaurant } = require("../sequelize_crud/sequelize-connect");
 

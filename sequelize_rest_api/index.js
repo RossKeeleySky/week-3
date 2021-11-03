@@ -6,21 +6,27 @@ const {
     MenuItem,
 } = require('../sequelize_crud/sequelize-connect');
 const express = require('express');
+const { check, validationResult } = require("express-validator");
 const app = express();
 const port = 3003;
   
   // support req.body parsing
 app.use(express.json());
   
-app.post('/api/restaurants', async (req, res) => {
+app.post('/api/restaurants', 
+    [check("name").not().isEmpty().trim().escape()], 
+    async (req, res) => {
     try {
-    // create a row in the database using sequelize create method
-    const restaurant = await Restaurant.create(req.body);
-    
-    // 201 = created a resource
-    res.status(201).send(restaurant);
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() })
+        }
+        // create a row in the database using sequelize create method
+        const restaurant = await Restaurant.create(req.body);
+        // 201 = created a resource
+        res.status(201).send(restaurant);
     } catch (e) {
-    res.status(400).send(e.message);
+        res.status(400).send(e.message);
     }
 })
 
@@ -225,8 +231,6 @@ app.put('/api/menuitems/:id', async (req, res) => {
         res.status(400).send(e.message);
     }
 });
-
-
 
 // 6. use Sequelize validation to validate the data being sent (you'll do this in the model). Which status code would you send back?
 
