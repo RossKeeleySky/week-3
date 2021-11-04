@@ -1,16 +1,18 @@
+const express = require('express');
 // get the instance of sequelize
 const {
     connection,
     Restaurant,
     Menu,
     MenuItem,
-} = require('../sequelize_crud/sequelize-connect');
-const express = require('express');
+} = require('./sequelize-connect');
 const { check, validationResult } = require("express-validator");
 const app = express();
 const port = 3003;
   
-  // support req.body parsing
+app.use(express.urlencoded({ extended: true }))
+
+// support req.body parsing
 app.use(express.json());
   
 app.post('/api/restaurants', 
@@ -48,9 +50,24 @@ app.get('/api/restaurants/:id', async (req, res) => {
         const restaurants = await Restaurant.findAll({
             where: req.params
         });
+        const menus = await Menu.findAll({
+            where: {
+                RestaurantId: req.params.id,
+                
+            },
+            include: [MenuItem],
+        });
+        // const menuItems = menus.map(async (menu) => {
+        //     return await MenuItem.findAll({
+        //         where: {
+        //             MenuId: menu.id
+        //         }
+        //     })
+            
+        // });
 
         // 200 = success
-        res.status(200).send(restaurants);
+        res.status(200).send({ restaurants, menus });
     } catch (e) {
         res.status(400).send(e.message);
     }
@@ -81,6 +98,7 @@ app.put('/api/restaurants/:id', async (req, res) => {
         const restaurantUpdated = await Restaurant.findAll({
             where: req.params
         }); 
+
 
         // 200 = success
         res.status(200).send(restaurantUpdated);
