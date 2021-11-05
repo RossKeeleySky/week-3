@@ -1,12 +1,6 @@
 const express = require('express');
 // get the instance of sequelize
-const {
-    connection,
-    Restaurant,
-    Menu,
-    MenuItem,
-} = require('./sequelize-connect');
-const { check, validationResult } = require("express-validator");
+const { connection } = require('./sequelize-connect');
 const app = express();
 const routes = require("./routes/index-router.js");
 const port = 3003;

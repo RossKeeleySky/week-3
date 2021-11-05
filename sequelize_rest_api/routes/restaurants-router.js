@@ -41,22 +41,26 @@ router.get('/api/restaurants', async (req, res) => {
 router.get('/api/restaurants/:id', async (req, res) => {
     try {
         const restaurants = await Restaurant.findAll({
-            where: req.params
-        });
-        const menus = await Menu.findAll({
             where: {
-                RestaurantId: req.params.id,
-                
-            },
-            include: [MenuItem],
+                id: req.params.id
+            },  
+            include: {
+                model: Menu,
+                include: {
+                    model: MenuItem
+                }
+            }
         });
-        // const menuItems = menus.map(async (menu) => {
-        //     return await MenuItem.findAll({
-        //         where: {
-        //             MenuId: menu.id
-        //         }
-        //     })
-            
+
+        // const restaurants = await Restaurant.findAll({
+        //     where: req.params
+        // });
+        // const menus = await Menu.findAll({
+        //     where: {
+        //         RestaurantId: req.params.id,
+                
+        //     },
+        //     include: [MenuItem],
         // });
 
         // 200 = success

@@ -11,10 +11,6 @@ const menuItemsRouter = require('./menu-items-router');
 router.use('/', restaurantsRouter);
 router.use('/', menusRouter);
 router.use('/', menuItemsRouter);
-// router.use('/', indexRouter);
-// router.use('/users', usersRouter);
-// router.use('/decks', decksRouter);
-// router.use('/cards', cardsRouter);
-// router.use('/cards/new', cardsRouter);
+
 
 module.exports = router;
