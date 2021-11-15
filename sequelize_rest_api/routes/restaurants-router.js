@@ -8,7 +8,7 @@ const {
 } = require('../sequelize-connect');
 const { check, validationResult } = require("express-validator");
 
-router.post('/api/restaurants', 
+router.post('/', 
     [check("name").not().isEmpty().trim().escape()], 
     async (req, res) => {
     try {
@@ -25,7 +25,7 @@ router.post('/api/restaurants',
     }
 })
 
-router.get('/api/restaurants', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
     // create a row in the database using sequelize create method
     const restaurants = await Restaurant.findAll({});
@@ -38,7 +38,7 @@ router.get('/api/restaurants', async (req, res) => {
 });
   
 // 1. create an endpoint that will get a restaurant by ID (HTTP Method = get)
-router.get('/api/restaurants/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const restaurants = await Restaurant.findAll({
             where: {
@@ -64,14 +64,14 @@ router.get('/api/restaurants/:id', async (req, res) => {
         // });
 
         // 200 = success
-        res.status(200).send({ restaurants, menus });
+        res.status(200).send({ restaurants });
     } catch (e) {
         res.status(400).send(e.message);
     }
 });
 
 // 2. create an endpoint that will delete a restaurant by ID (HTTP Method = delete)
-router.delete('/api/restaurants/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const restaurants = await Restaurant.destroy({
             where: req.params
@@ -86,7 +86,7 @@ router.delete('/api/restaurants/:id', async (req, res) => {
     }
 });
 // 3. create an endpoint that will update a restaurant by ID (HTTP Method = put)
-router.put('/api/restaurants/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const restaurant = await Restaurant.update(req.body, {
             where: req.params

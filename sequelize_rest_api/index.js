@@ -15,10 +15,10 @@ app.use("/", routes);
  * Synchronize all models with db
  */
 async function start() {
-await connection.sync({
-    logging: false, // don't log everything
-    // force: true, // drop tables each time
-});
+    await connection.sync({
+        logging: false, // don't log everything
+        // force: true, // drop tables each time
+    });
 }
 
 // run start and log any errors

@@ -8,9 +8,9 @@ const restaurantsRouter = require('./restaurants-router');
 const menusRouter = require('./menus-router');
 const menuItemsRouter = require('./menu-items-router');
 
-router.use('/', restaurantsRouter);
-router.use('/', menusRouter);
-router.use('/', menuItemsRouter);
+router.use('/api/restaurants', restaurantsRouter);
+router.use('/api/menus', menusRouter);
+router.use('/api/menuitems', menuItemsRouter);
 
 
 module.exports = router;

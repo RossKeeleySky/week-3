@@ -7,7 +7,7 @@ const {
     MenuItem,
 } = require('../sequelize-connect');
 
-router.post('/api/menuitems', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
     const menuItems = await MenuItem.create(req.body);
     
@@ -18,7 +18,7 @@ router.post('/api/menuitems', async (req, res) => {
     }
 })
 
-router.get('/api/menuitems', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
     const menuItems = await MenuItem.findAll({});
 
@@ -30,7 +30,7 @@ router.get('/api/menuitems', async (req, res) => {
 });
 
 // Create an endpoint that will get a menu item by ID (HTTP Method = get)
-router.get('/api/menuitems/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const menuItems = await MenuItem.findAll({
             where: req.params
@@ -43,7 +43,7 @@ router.get('/api/menuitems/:id', async (req, res) => {
 });
 
 // Create an endpoint that will delete a menu item by ID (HTTP Method = delete)
-router.delete('/api/menuItems/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const menuItems = await MenuItem.destroy({
             where: req.params
@@ -58,7 +58,7 @@ router.delete('/api/menuItems/:id', async (req, res) => {
     }
 });
 // Create an endpoint that will update a menu item by ID (HTTP Method = put)
-router.put('/api/menuitems/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const menuItems = await MenuItem.update(req.body, {
             where: req.params
